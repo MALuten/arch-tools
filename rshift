@@ -1,0 +1,7 @@
+#!/bin/bash
+x=$(cat /usr/local/bin/mconfig/redshiftvalue)
+for i in $(eval echo {$x..$1..250}); do
+	redshift -O $i
+done
+tee /usr/local/bin/mconfig/redshiftvalue <<< $1
+

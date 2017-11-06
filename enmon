@@ -1,0 +1,8 @@
+#!/bin/bash
+
+sudo systemctl stop NetworkManager
+sudo systemctl stop wpa_supplicant
+
+echo "NetworkManager & wpa_supplicant services stopped"
+
+sudo airmon-ng start wlp68s0b1
