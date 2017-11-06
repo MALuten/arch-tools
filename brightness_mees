@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function SetSmBr {
+	y=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
+
+	for i in $(eval echo {$y..$1..$2}); do
+		tee /sys/class/backlight/intel_backlight/brightness <<< $i
+	done
+
+	tee /sys/class/backlight/intel_backlight/brightness <<< $1
+}
+
+
+if [ "$1" == "off" ]; then
+	SetSmBr 0 15
+else
+	x=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
+	((x=x $1))
+	SetSmBr $x 5
+fi
